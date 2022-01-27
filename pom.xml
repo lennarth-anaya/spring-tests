@@ -47,7 +47,7 @@
 		</dependency>
 		<!-- END: FOR UNIT TESTS -->
 		
-		<!-- BEGIN: FOR INTEGRATION TESTS -->
+		<!-- BEGIN: FOR HTTP INTEGRATION TESTS -->
     	<dependency>
 		    <groupId>org.mock-server</groupId>
 		    <artifactId>mockserver-netty</artifactId>
@@ -72,7 +72,7 @@
 			<version>${htmlunit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- END: FOR INTEGRATION TESTS -->
+		<!-- END: FOR HTTP INTEGRATION TESTS -->
 	</dependencies>
 
 	<build>

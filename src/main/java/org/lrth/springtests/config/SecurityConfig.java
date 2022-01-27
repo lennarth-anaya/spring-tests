@@ -1,4 +1,4 @@
-package org.lrth.springtests.controller;
+package org.lrth.springtests.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -14,12 +14,11 @@ public class SecurityConfig {
         http
             .httpBasic(Customizer.withDefaults())
             .authorizeRequests(authz -> authz
-//             .anyRequest().permitAll()
                .antMatchers("/about").permitAll()
                .antMatchers("/submissions").hasRole("SPEAKER")
                .antMatchers(HttpMethod.GET, "/broadcast").hasRole("LISTENER")
                .antMatchers(HttpMethod.POST, "/broadcast").hasRole("SPEAKER")
-               .anyRequest().authenticated()  
+               .anyRequest().authenticated()
             );
         
         return http.build();
