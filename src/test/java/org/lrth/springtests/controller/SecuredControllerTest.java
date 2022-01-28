@@ -38,11 +38,6 @@ public class SecuredControllerTest {
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
-//        fails due to missing springSecurityConfig:
-//        mockMvc = MockMvcBuilders
-//                .standaloneSetup(securedController)
-//                .apply(springSecurity())
-//                .build();
     }
     
     @Test
