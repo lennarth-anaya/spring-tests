@@ -28,17 +28,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.lrth.springtests.SpringTestsApplication;
 
 @SpringBootTest(
-    // instead of import below
     classes = SpringTestsApplication.class,
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @ActiveProfiles("test")
 @ExtendWith(MockServerExtension.class)
-@MockServerSettings(ports = {BaseSetupIntegrationTest.MOCKED_REMOTE_SERVER_PORT})
+@MockServerSettings(ports = {HttpIntegrationBaseTest.MOCKED_REMOTE_SERVER_PORT})
 @Import({TestConfig.class})
-public class BaseSetupIntegrationTest {
-    // any available port
-    public static final int MOCKED_REMOTE_SERVER_PORT = HttpRedirectionController.REMOTE_PORT;
+public class HttpIntegrationBaseTest {
+    // must be the same as in application-test.properties used by controller
+    public static final int MOCKED_REMOTE_SERVER_PORT = 8108;
 
     MockServerClient mockServerClient;
     WebClient browserClient = new WebClient();

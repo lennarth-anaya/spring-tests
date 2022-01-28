@@ -2,6 +2,7 @@ package org.lrth.springtests.controller.integration;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,19 +12,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HttpRedirectionController {
     public static final String INPUT_PATH = "/process-and-redirect";
     
-    // TODO next would come from properties file instead:
-    public static final String REMOTE_HOST = "http://localhost";
-    public static final int REMOTE_PORT = 8108;
+    @Value("${testapp.remote.host}")
+    public String remoteHost;
+    @Value("${testapp.remote.port}")
+    public int remotePort;
 
-    public static final String REMOTE_SCHEMA = REMOTE_HOST + ":" + REMOTE_PORT;
-    public static final String REDIRECT_URL = REMOTE_SCHEMA + "/remote-action";
-    
     @GetMapping(INPUT_PATH + "/{param}")
     public void processAndRedirect(
        HttpServletResponse httpServletResponse,
        @PathVariable String param
     ) {
-        httpServletResponse.setHeader("Location", REDIRECT_URL + "?a=b");
+        httpServletResponse.setHeader("Location", getRedirectUrl() + "?a=b");
         httpServletResponse.setStatus(HttpStatus.FOUND.value());
+    }
+    
+    public String getRemoteHost() {
+        return remoteHost;
+    }
+    
+    public int getRemotePort() {
+        return remotePort;
+    }
+    
+    public String getRemoteSchema() {
+        return remoteHost + ":" + remotePort;
+    }
+    
+    public String getRedirectUrl() {
+        return getRemoteSchema() + "/remote-action";
     }
 }

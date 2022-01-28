@@ -25,16 +25,20 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.gargoylesoftware.htmlunit.WebResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 //isolated would prevent collisions in concurrent tests
 @Isolated
 @ActiveProfiles("test")
 public class TestJavaScriptRedirectIntegrationTest
-    extends BaseSetupIntegrationTest
+    extends HttpIntegrationBaseTest
 {
 
     private HttpRequest redirectRequest;
+    
+    @Autowired
+    private JavaScriptRedirectionController jsRedirController;
     
     @Test
     void testJavaScriptRedirect() throws Exception {
@@ -76,7 +80,7 @@ public class TestJavaScriptRedirectIntegrationTest
         
         // Mock Remote Server Controller2 whose HTML form JS would auto-submit
         //   (HTTP POST)
-        String redirectUrl = JavaScriptRedirectionController.FORM_URL;
+        String redirectUrl = jsRedirController.getFormUrl();
         // MockServer just requires the path, host and port are obviated
         String redirectPath = new URL(redirectUrl).getPath();
         redirectRequest = request().withMethod("POST")

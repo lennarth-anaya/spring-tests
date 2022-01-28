@@ -3,10 +3,6 @@ package org.lrth.springtests.controller.integration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -18,21 +14,15 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Isolated;
 import org.mockserver.model.HttpRequest;
-import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 // isolated would prevent collisions in concurrent tests
 @Isolated
-@ActiveProfiles("test")
 public class Test302RedirectIntegrationTest
-    extends BaseSetupIntegrationTest
+    extends HttpIntegrationBaseTest
 {
     @Test
     void testHttp302Redirect() throws Exception {
@@ -73,7 +63,7 @@ public class Test302RedirectIntegrationTest
         String controller1RedirectResponseBodyMock = "ctrlr1_response";
         
         // Mock Remote Server Controller1 would redirect to
-        String controller1RedirectUrl = HttpRedirectionController.REDIRECT_URL
+        String controller1RedirectUrl = httpRedirectionController.getRedirectUrl()
             + "?a=b"; // ?a=b just to emphasize it's GET
         // MockServer just requires the path, host and port are obviated
         String controller1RedirectPath = new URL(controller1RedirectUrl).getPath();
