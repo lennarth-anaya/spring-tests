@@ -38,3 +38,7 @@ would be necessary for such integration testing:
   
   TestJavaScriptRedirectIntegrationTest -- calls --> JavaScriptRedirectionController -- responds -->
     HTML with JavaScript that auto-submits form -- to --> remote host mocked by server-mock
+
+## Test Containers
+
+Includes a simple test that uses Testcontainers with a MariaDB database to test transactional commits and rollbacks.
