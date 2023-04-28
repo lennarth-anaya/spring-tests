@@ -3,7 +3,7 @@
 
 ## SecuredControllerTest
 
-Shows how to use @SpringBootTest with Spring Security to verify that endpoints are
+**SecuredControllerTest**. Shows how to use @SpringBootTest with Spring Security to verify that endpoints are
 properly non-secured, secured by any authenticated user or even by an specific role
 per HTTP method.
 
@@ -20,7 +20,7 @@ would be necessary for such integration testing:
   etc.
   
 2. When you want to validate HTTP headers, like 302 redirection, tested in this project by
-  Test302RedirectIntegrationTest, which extends HttpIntegrationBaseTest to reuse repetitive 
+  **Test302RedirectIntegrationTest**, which extends **HttpIntegrationBaseTest** to reuse repetitive 
   setup code.
   
   Test302RedirectIntegrationTest -- calls --> HttpRedirectionController -- responds -->
@@ -33,12 +33,18 @@ would be necessary for such integration testing:
   perform the redirect behind the scenes in the automated test, allowing in combination of
   mock-server to inspect the navigation.
   
-  This is tested in this project by TestJavaScriptRedirectIntegrationTest, which extends 
+  This is tested in this project by **TestJavaScriptRedirectIntegrationTest**, which extends 
   HttpIntegrationBaseTest to reuse repetitive setup code.
   
   TestJavaScriptRedirectIntegrationTest -- calls --> JavaScriptRedirectionController -- responds -->
     HTML with JavaScript that auto-submits form -- to --> remote host mocked by server-mock
 
+
 ## Test Containers
 
-Includes a simple test that uses Testcontainers with a MariaDB database to test transactional commits and rollbacks.
+**ServiceXDbTxIT**. Simple test that uses Testcontainers with a MariaDB database to test transactional commits and rollbacks.
+
+
+## Spring Validations
+
+**BeanValidationControllerTest**. Showcases how the Spring validation works and how to test it out. Especially useful with large requests in which validations are critical and subject to changes.
